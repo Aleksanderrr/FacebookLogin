@@ -30,6 +30,12 @@ public class LoginPage extends BasePage{
         clickBy(by);
     }
 
+    public void login(String login, String password){
+        enterLogin(login);
+        enterPassword(password);
+        clickLogin();
+    }
+
     public String getBodyText() {
         By by = By.tagName("body");
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
@@ -37,14 +43,5 @@ public class LoginPage extends BasePage{
         return body.getText();
     }
 
-    public boolean isLogoutMenuVisible(){
-        By by = By.id("logoutMenu");
-        try {
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
-            return true;
-        }
-        catch (TimeoutException e){
-            return false;
-        }
-    }
+
 }

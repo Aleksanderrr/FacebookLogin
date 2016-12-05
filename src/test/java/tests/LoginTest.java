@@ -6,6 +6,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.BasePage;
+import pages.HomePage;
 import pages.LoginPage;
 
 import static org.testng.Assert.assertTrue;
@@ -14,6 +15,7 @@ public class LoginTest {
     private static WebDriver driver;
     static BasePage basePage;
     static LoginPage loginPage;
+    static HomePage homePage;
     String correctLogin = "zdzislaw.kiepura@wp.pl";
     String correctPassword = "tojesttest";
     String incorrectPassword = "Bella Ciao!";
@@ -24,6 +26,7 @@ public class LoginTest {
         driver = new ChromeDriver();
         basePage = new BasePage(driver);
         loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
 }
@@ -33,9 +36,7 @@ public class LoginTest {
         //GIVEN
         loginPage.open();
         //WHEN
-        loginPage.enterLogin(correctLogin);
-        loginPage.enterPassword(incorrectPassword);
-        loginPage.clickLogin();
+        loginPage.login(correctLogin, incorrectPassword);
         //THEN
         assertTrue(loginPage.getBodyText().contains("Odzyskaj swoje konto"));
     }
@@ -45,11 +46,9 @@ public class LoginTest {
         //GIVEN
         loginPage.open();
         //WHEN
-        loginPage.enterLogin(correctLogin);
-        loginPage.enterPassword(correctPassword);
-        loginPage.clickLogin();
+        loginPage.login(correctLogin, correctPassword);
         //THEN
-        assertTrue(loginPage.isLogoutMenuVisible());
+        assertTrue(homePage.isLogoutMenuVisible());
     }
 
     @AfterClass
