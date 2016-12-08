@@ -13,7 +13,6 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginTest {
     private static WebDriver driver;
-    static BasePage basePage;
     static LoginPage loginPage;
     static HomePage homePage;
     String correctLogin = "zdzislaw.kiepura@wp.pl";
@@ -24,7 +23,6 @@ public class LoginTest {
     public static void before(){
         System.setProperty("webdriver.chrome.driver", "C:/chromedriver.exe");
         driver = new ChromeDriver();
-        basePage = new BasePage(driver);
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
         driver.manage().deleteAllCookies();
